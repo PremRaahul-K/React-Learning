@@ -26,3 +26,20 @@
   );
   }
   ```
+
+- We can use the map function to render all the elements of the list in react
+
+```JavaScript
+function ListGroup() {
+  const items = [
+    "India",
+  ];
+  return (
+    <ul className="list-group">
+      {items.map((item) => (
+        <li className="list-group-item">{item}</li>
+      ))}
+    </ul>
+  );
+}
+```

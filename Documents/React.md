@@ -248,6 +248,66 @@ export default App;
 
 ```
 
+- We can use children property to pass the data as a prop
+
+```Javascript
+interface Props {
+  children: string;
+}
+
+const Alert = ({ children }: Props) => {
+  return <div className="alert alert-primary">{children}</div>;
+};
+
+export default Alert;
+
+```
+
+```Javascript
+import Alert from "./components/Alert";
+import ListGroup from "./components/ListGroup";
+
+function App() {
+  return (
+    <div>
+      <Alert>Hello World!</Alert>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+- We can use ReactNode to pass Html element as to children to the component
+
 ```Javascript
 
+import Alert from "./components/Alert";
+import ListGroup from "./components/ListGroup";
+
+function App() {
+  return (
+    <div>
+      <Alert>
+        Hello <span>World!</span>
+      </Alert>
+    </div>
+  );
+}
+
+export default App;
+
+
+import { ReactNode } from "react";
+
+interface Props {
+  children: ReactNode;
+}
+
+const Alert = ({ children }: Props) => {
+  return <div className="alert alert-primary">{children}</div>;
+};
+
+export default Alert;
 ```

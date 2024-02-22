@@ -185,6 +185,69 @@ export default ListGroup;
 
 ```
 
+- We can pass function as props to make parent get notified when any action is performed in the child component
+
 ```JavaScript
+import { useState } from "react";
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+```Javascript
+import ListGroup from "./components/ListGroup";
+
+function App() {
+  const items = [
+    "Biriyani",
+  ];
+  const handleSelect = (item: string) => {
+    console.log(item);
+  };
+  return (
+    <div>
+      <ListGroup items={items} heading="Foods" onSelectItem={handleSelect} />
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+```Javascript
 
 ```

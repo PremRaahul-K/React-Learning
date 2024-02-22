@@ -9,9 +9,12 @@ function App() {
     "Noodles",
     "Ice Cream",
   ];
+  const handleSelect = (item: string) => {
+    console.log(item);
+  };
   return (
     <div>
-      <ListGroup items={items} heading="Foods" />
+      <ListGroup items={items} heading="Foods" onSelectItem={handleSelect} />
     </div>
   );
 }

@@ -93,6 +93,42 @@ function ListGroup() {
 export default ListGroup;
 ```
 
+- We can use useState in react to update the state of the component based on any action or an event
+
+```JavaScript
+import { useState } from "react";
+
+function ListGroup() {
+  const items = [
+    "India",
+  ];
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>List</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => setSelectedIndex(index)}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
 ```JavaScript
 
 ```

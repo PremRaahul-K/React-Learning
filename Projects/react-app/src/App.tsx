@@ -1,9 +1,17 @@
 import ListGroup from "./components/ListGroup";
 
 function App() {
+  const items = [
+    "Biriyani",
+    "Pasta",
+    "Pizza",
+    "Burger",
+    "Noodles",
+    "Ice Cream",
+  ];
   return (
     <div>
-      <ListGroup />
+      <ListGroup items={items} heading="Foods" />
     </div>
   );
 }

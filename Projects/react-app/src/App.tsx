@@ -1,15 +1,9 @@
-import Button from "./components/Button";
-import { useState } from "react";
-import Alert from "./components/Alert";
+import Like from "./components/Like";
 
 function App() {
-  const [alert, setAlert] = useState(false);
   return (
     <div>
-      {alert && <Alert onClose={() => setAlert(false)}>My alert</Alert>}
-      <Button color="primary" onClick={() => setAlert(true)}>
-        My Button
-      </Button>
+      <Like onClick={() => console.log("Clicked")} />
     </div>
   );
 }

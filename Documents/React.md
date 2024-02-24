@@ -7,6 +7,12 @@
 
 - To run the react project we can use `npm run dev`
 
+## Building Components(58m)
+
+### Creating a ListGroup Component
+
+### Fragments
+
 - To install and import the bootstrap package we can use this commands
   `npm install bootstrap`
   `import "bootstrap/dist/css/bootstrap.css";`
@@ -27,6 +33,8 @@
   }
   ```
 
+### Rendering Lists
+
 - We can use the map function to render all the elements of the list in react
 
 ```JavaScript
@@ -43,6 +51,8 @@ function ListGroup() {
   );
 }
 ```
+
+### Conditional Rendering
 
 - We can use ternary operator or conditional rendering to render the items based on the condition
 
@@ -64,6 +74,8 @@ function ListGroup() {
   );
 }
 ```
+
+### Handling Events
 
 - We can handle the click event in react using onClick = {}
 
@@ -92,6 +104,8 @@ function ListGroup() {
 
 export default ListGroup;
 ```
+
+### Managing State
 
 - We can use useState in react to update the state of the component based on any action or an event
 
@@ -128,6 +142,8 @@ function ListGroup() {
 
 export default ListGroup;
 ```
+
+### Passing Data via Props
 
 - In react we can pass data dynamically with the help of props
 
@@ -184,6 +200,8 @@ function ListGroup({ items, heading }: Props) {
 export default ListGroup;
 
 ```
+
+### Passing Functions via Props
 
 - We can pass function as props to make parent get notified when any action is performed in the child component
 
@@ -248,6 +266,8 @@ export default App;
 
 ```
 
+### Passing Children
+
 - We can use children property to pass the data as a prop
 
 ```Javascript
@@ -310,4 +330,235 @@ const Alert = ({ children }: Props) => {
 };
 
 export default Alert;
+```
+
+## Styling Components(32m)
+
+### Vanilla CSS
+
+- We can apply vanilla css by creating a css file with the required styles
+
+```JavaScript
+import { useState } from "react";
+import "./ListGroup.css";
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+```Css
+.list-group {
+  list-style: none;
+  padding: 0;
+}
+```
+
+### CSS Modules
+
+- We can use the css modules to solve the css conflect issues of overiding
+
+```JavaScript
+import { useState } from "react";
+import styles from "./ListGroup.module.css";
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <ul className={[styles.listGroup, styles.container].join(" ")}>
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+```Css
+.listGroup {
+  list-style: none;
+  padding: 0;
+}
+
+.container {
+  background-color: yellow;
+}
+```
+
+### CSS-in-JS
+
+- We can use the styled components package to style the components with help of js
+- To use the styled components package we need to install it with the help of npm `npm install styled-components`
+- To use the types for the styled components we need to install another package called `npm install @types/styled-components`
+
+```JavaScript
+import { useState } from "react";
+import "./ListGroup.css";
+import styled from "styled-components";
+
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+interface ListItemProps {
+  active: boolean;
+}
+
+const ListItem = styled.li<ListItemProps>`
+  padding: 10px 0px;
+  background-color: ${(props) => (props.active ? "grey" : "transparent")};
+`;
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <List>
+        {items.map((item, index) => (
+          <ListItem
+            key={item}
+            active={index === selectedIndex}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </ListItem>
+        ))}
+      </List>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+### Inline Styles
+
+- We can also apply inline styling to the elements with help of objects
+
+```JavaScript
+import { useState } from "react";
+import "./ListGroup.css";
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <ul className="list-group" style={{ backgroundColor: "yellow" }}>
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+### Adding Icons
+
+- We can use react-icons package to add icons to our project
+
+```JavaScript
+import { BsCalendar2CheckFill } from "react-icons/bs";
+
+function App() {
+  return (
+    <div>
+      <BsCalendar2CheckFill color="red" size={40} />
+    </div>
+  );
+}
+
+export default App;
 ```

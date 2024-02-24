@@ -7,6 +7,12 @@
 
 - To run the react project we can use `npm run dev`
 
+## Building Components(58m)
+
+### Creating a ListGroup Component
+
+### Fragments
+
 - To install and import the bootstrap package we can use this commands
   `npm install bootstrap`
   `import "bootstrap/dist/css/bootstrap.css";`
@@ -27,6 +33,8 @@
   }
   ```
 
+### Rendering Lists
+
 - We can use the map function to render all the elements of the list in react
 
 ```JavaScript
@@ -43,6 +51,8 @@ function ListGroup() {
   );
 }
 ```
+
+### Conditional Rendering
 
 - We can use ternary operator or conditional rendering to render the items based on the condition
 
@@ -64,6 +74,8 @@ function ListGroup() {
   );
 }
 ```
+
+### Handling Events
 
 - We can handle the click event in react using onClick = {}
 
@@ -92,6 +104,8 @@ function ListGroup() {
 
 export default ListGroup;
 ```
+
+### Managing State
 
 - We can use useState in react to update the state of the component based on any action or an event
 
@@ -128,6 +142,8 @@ function ListGroup() {
 
 export default ListGroup;
 ```
+
+### Passing Data via Props
 
 - In react we can pass data dynamically with the help of props
 
@@ -184,6 +200,8 @@ function ListGroup({ items, heading }: Props) {
 export default ListGroup;
 
 ```
+
+### Passing Functions via Props
 
 - We can pass function as props to make parent get notified when any action is performed in the child component
 
@@ -248,6 +266,8 @@ export default App;
 
 ```
 
+### Passing Children
+
 - We can use children property to pass the data as a prop
 
 ```Javascript
@@ -311,3 +331,7 @@ const Alert = ({ children }: Props) => {
 
 export default Alert;
 ```
+
+## Styling Components(32m)
+
+### Vanilla CSS

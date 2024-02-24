@@ -335,3 +335,111 @@ export default Alert;
 ## Styling Components(32m)
 
 ### Vanilla CSS
+
+- We can apply vanilla css by creating a css file with the required styles
+
+```JavaScript
+import { useState } from "react";
+import "./ListGroup.css";
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+```Css
+.list-group {
+  list-style: none;
+  padding: 0;
+}
+```
+
+- We can use the css modules to solve the css conflect issues of overiding
+
+```JavaScript
+import { useState } from "react";
+import styles from "./ListGroup.module.css";
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <ul className={[styles.listGroup, styles.container].join(" ")}>
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+```Css
+.listGroup {
+  list-style: none;
+  padding: 0;
+}
+
+.container {
+  background-color: yellow;
+}
+```
+
+```JavaScript
+
+```

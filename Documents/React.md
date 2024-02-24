@@ -386,6 +386,8 @@ export default ListGroup;
 }
 ```
 
+### CSS Modules
+
 - We can use the css modules to solve the css conflect issues of overiding
 
 ```JavaScript
@@ -440,6 +442,105 @@ export default ListGroup;
 }
 ```
 
-```JavaScript
+### CSS-in-JS
 
+- We can use the styled components package to style the components with help of js
+- To use the styled components package we need to install it with the help of npm `npm install styled-components`
+- To use the types for the styled components we need to install another package called `npm install @types/styled-components`
+
+```JavaScript
+import { useState } from "react";
+import "./ListGroup.css";
+import styled from "styled-components";
+
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+interface ListItemProps {
+  active: boolean;
+}
+
+const ListItem = styled.li<ListItemProps>`
+  padding: 10px 0px;
+  background-color: ${(props) => (props.active ? "grey" : "transparent")};
+`;
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <List>
+        {items.map((item, index) => (
+          <ListItem
+            key={item}
+            active={index === selectedIndex}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </ListItem>
+        ))}
+      </List>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+### Inline Styles
+
+- We can also apply inline styling to the elements with help of objects
+
+```JavaScript
+import { useState } from "react";
+import "./ListGroup.css";
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items to display</p>}
+      <ul className="list-group" style={{ backgroundColor: "yellow" }}>
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
 ```

@@ -279,7 +279,7 @@ export default App;
 
 ```
 
-- We can use ReactNode to pass Html element as to children to the component
+- We can use ReactNode to pass Html elements as to children to the component
 
 ```Javascript
 

@@ -544,3 +544,21 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
 
 export default ListGroup;
 ```
+
+### Adding Icons
+
+- We can use react-icons package to add icons to our project
+
+```JavaScript
+import { BsCalendar2CheckFill } from "react-icons/bs";
+
+function App() {
+  return (
+    <div>
+      <BsCalendar2CheckFill color="red" size={40} />
+    </div>
+  );
+}
+
+export default App;
+```

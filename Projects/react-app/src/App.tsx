@@ -1,9 +1,9 @@
-import { BsCalendar2CheckFill } from "react-icons/bs";
+import Button from "./components/Button/Button";
 
 function App() {
   return (
     <div>
-      <BsCalendar2CheckFill color="red" size={40} />
+      <Button onClick={() => {}}>My Button</Button>
     </div>
   );
 }

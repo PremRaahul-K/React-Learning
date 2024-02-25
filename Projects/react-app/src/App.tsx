@@ -1,38 +1,23 @@
 import { useState } from "react";
 import { produce } from "immer";
+import ExpandableText from "./components/ExpandableText";
 
 function App() {
-  const [cart, setCart] = useState({
-    discount: 0.1,
-    items: [
-      { id: 1, name: "Shoes", price: 50, qty: 1 },
-      { id: 2, name: "Shirt", price: 20, qty: 1 },
-    ],
-  });
-  const handleClick = () => {
-    // setCart({
-    //   ...cart,
-    //   items: cart.items.map((item) =>
-    //     item.id === 1 ? { ...item, qty: item.qty + 1 } : item
-    //   ),
-    // });
-    setCart(
-      produce((draft) => {
-        draft.items.map((item) => (item.id === 1 ? item.qty++ : item.qty));
-      })
-    );
-  };
   return (
     <div>
-      <h1>Cart</h1>
-      <ul>
-        {cart.items.map((item) => (
-          <li key={item.id}>
-            {item.name} - ${item.price} - {item.qty}
-          </li>
-        ))}
-      </ul>
-      <button onClick={handleClick}>Click Here</button>
+      <ExpandableText maxLength={10}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit iure
+        quidem ducimus perspiciatis non similique corporis nobis, beatae
+        quibusdam, ea nesciunt unde, laudantium cumque labore neque? Cum ex quis
+        modi est perferendis, dolore tenetur debitis quo vero odio enim
+        necessitatibus sunt. Expedita quod officia possimus incidunt explicabo
+        eveniet asperiores doloribus veritatis ullam maiores molestiae a ut
+        reprehenderit ducimus iusto error quisquam, sed nam, ipsam veniam
+        aperiam id quam consequuntur. Saepe recusandae id ipsa impedit? Ipsa
+        corrupti, at accusamus distinctio facere ipsum voluptatibus cum esse
+        labore velit excepturi, quam quae? Deserunt dolores animi similique id
+        quam ea voluptate dignissimos harum ullam. Quisquam, quos. Quisquam
+      </ExpandableText>
     </div>
   );
 }
